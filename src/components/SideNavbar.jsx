@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, NavLink } from "react-bootstrap";
 import {
   FaHome,
   FaSignOutAlt,
@@ -14,8 +14,10 @@ import {
   FaUsers,
   FaInfoCircle,
 } from "react-icons/fa";
+import { useState } from "react";
 
 const SideNavbar = () => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <Col md={10} className="bg-light" style={{ marginTop: "1px" }}>
       {/* Your side navigation content goes here */}
@@ -79,6 +81,7 @@ const SideNavbar = () => {
               <FaChartLine style={{ marginRight: "10px" }} />
               Charts
             </Nav.Link>
+
             <Nav.Link as={Link} to="/users">
               <FaUsers style={{ marginRight: "10px" }} />
               Users

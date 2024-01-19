@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import logo3 from "../images/logo3.png";
 import img1 from "../images/img1.jpg";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const loginContainerStyle = {
   border: "1px solid #ddd",
   borderRadius: "3px",
@@ -10,7 +11,7 @@ const loginContainerStyle = {
   backgroundColor: "#f8f9fa",
   boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
   width: "85%",
-  height: "580px",
+  height: "520px",
 };
 
 const logoStyle = {
@@ -39,6 +40,33 @@ const formGroup = {
 };
 
 const Login = () => {
+  // State for storing user input
+  const [svcNo, setSvcNo] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
+  // Function to handle user login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      //
+      const res = await axios.post("http://localhost:3001/login", {
+        svcNo,
+        password,
+      });
+
+      // Check if login was successful
+
+      console.log(res);
+      navigate("/home", { replace: true });
+    } catch (error) {
+      // Handle unexpected errors during login
+      console.error("An error occurred during login:", error);
+      setError(error.response.data.message);
+    }
+  };
   return (
     <Container fluid>
       <Row
@@ -51,7 +79,7 @@ const Login = () => {
               style={{
                 textAlign: "center",
                 border: "1px solid 	#D3D3D3",
-                margin: "10px auto",
+                margin: "-7px auto",
               }}
             >
               <img
@@ -63,14 +91,22 @@ const Login = () => {
               />
             </div>
             <Form>
-              <h2 className="text-center mb-4">Login</h2>
-
-              <Form.Group controlId="formBasicEmail" style={formGroup}>
+              <h2 className="text-center mb-2 mt-3">Login</h2>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              <Form.Group style={formGroup}>
                 <Form.Label></Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter username"
+                  placeholder="Enter Username"
                   style={inputField}
+                  id="svcNo"
+                  value={svcNo}
+                  onChange={(e) => {
+                    if (error) {
+                      setError(null);
+                    }
+                    setSvcNo(e.target.value);
+                  }}
                 />
               </Form.Group>
 
@@ -80,20 +116,28 @@ const Login = () => {
                   type="password"
                   placeholder="Enter Password"
                   style={inputField}
+                  id="password"
+                  value={password}
+                  onChange={(e) => {
+                    if (error) {
+                      setError(null);
+                    }
+                    setPassword(e.target.value);
+                  }}
                 />
               </Form.Group>
 
               <Button
-                type="submit"
                 style={{
                   marginTop: "25px",
-                  width: "120px",
+                  width: "100px",
                   height: "50px",
                   borderRadius: "0px",
                   backgroundColor: "white",
                   border: "1px solid #D3D3D3",
                   color: "black",
                 }}
+                onClick={handleLogin}
               >
                 Login
               </Button>

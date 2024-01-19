@@ -1,63 +1,60 @@
 // Import necessary libraries and components
-import React from 'react';
-import { Navbar, Nav, NavLink } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavDropdown } from 'react-bootstrap';
+import React from "react";
+import DataTable from "react-data-table-component";
+import { useState } from "react";
 
-
-
-// Create your functional component
 const Test = () => {
+  // Define columns
+  const columns = [
+    { name: "Name", selector: (row) => row.name, sortable: true },
+    { name: "Email", selector: (row) => row.email, sortable: true },
+    { name: "Age", selector: (row) => row.age, sortable: true },
 
-    const dropdownStyle = {
-        backgroundColor: 'black', // Background color of the dropdown
-      };
-    
-      const dropdownItemStyle = {
-        color: 'black', // Text color of dropdown items
-      };
-    
-      const dropdownItemHoverStyle = {
-        backgroundColor: '#555', // Background color on hover
-        color: 'black', // Text color on hover
-      }; 
+    // Add more columns as needed
+  ];
 
-    return (
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand as={NavLink} to="#home">
-            Your Logo
-          </Navbar.Brand>
-          <Nav className="mr-auto">
-            {/* Parent Nav Link */}
-            <Nav.Link as={NavLink} to="#home">
-              Home
-            </Nav.Link>
-    
-            {/* Parent Nav Link with child Nav Links */}
-            <Nav.Link as={NavLink} to="#features">
-              Features
-            </Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown" style={dropdownStyle}>
-              {/* Child Nav Links */}
-              <NavDropdown.Item as={NavLink} to="#action/1" style={dropdownItemStyle} activeStyle={dropdownItemHoverStyle}>
-                Action 1
-              </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="#action/2" style={dropdownItemStyle} activeStyle={dropdownItemHoverStyle}>
-                Action 2
-              </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="#action/3" style={dropdownItemStyle} activeStyle={dropdownItemHoverStyle}>
-                Action 3
-              </NavDropdown.Item>
-            </NavDropdown>
-    
-            {/* Another Parent Nav Link */}
-            <Nav.Link as={NavLink} to="#pricing">
-              Pricing
-            </Nav.Link>
-          </Nav>
-        </Navbar>
-      );
-}
+  // Sample data
+  const data = [
+    { id: 1, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 2, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 3, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 4, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 5, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 6, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 7, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    { id: 8, name: "John Doe", email: "yousaf@gmail.com", age: 23 },
+    // Add more data as needed
+  ];
 
-// Export your component
+  const [records, setRecords] = useState(data);
+
+  function handleFilter(event) {
+    const newData = data.filter((row) => {
+      return row.name.toLowerCase().includes(event.target.value.toLowerCase());
+    });
+    setRecords(newData);
+  }
+
+  return (
+    <div>
+      <div className="text-end">
+        <input type="text" onChange={handleFilter} />
+      </div>
+      <DataTable
+        title="User Data"
+        columns={columns}
+        data={records}
+        selectableRows
+        pagination
+        paginationPerPage={5}
+        paginationRowsPerPageOptions={[5, 10, 15]}
+        highlightOnHover
+        striped
+        responsive
+        fixedHeader
+      />
+    </div>
+  );
+};
+
 export default Test;

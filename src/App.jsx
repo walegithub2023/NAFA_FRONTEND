@@ -12,12 +12,15 @@ import NewUser from "./pages/NewUser";
 import ArchiveDocument from "./pages/ArchiveDocument";
 import ArchiveSignalDocument from "./pages/ArchiveSignalDocument";
 import ArchiveFloatDocument from "./pages/ArchiveFloatDocument";
+import EditUser from "./pages/EditUser";
 
 const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/archive" element={<Archive />} />
         <Route path="/retrievedocument" element={<RetrieveDocument />} />
@@ -26,7 +29,9 @@ const App = () => {
         <Route path="/users" element={<Users />} />
         <Route path="/test" element={<Test />} />
         <Route path="/newuser" element={<NewUser />} />
+        <Route path="/edituser" element={<EditUser />} />
         <Route path="/archivedocument" element={<ArchiveDocument />} />
+        <Route path="/logout" element={<Login />} />
         <Route
           path="/archivefloatdocument"
           element={<ArchiveFloatDocument />}

@@ -45,7 +45,7 @@ const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/" style={linkStyle}>
+          <Nav.Link as={Link} to="/Home" style={linkStyle}>
             <FaHome style={{ marginRight: "10px" }} />
             Home
           </Nav.Link>
