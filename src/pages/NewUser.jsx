@@ -80,10 +80,7 @@ const NewUser = () => {
   const createUser = async (e) => {
     e.preventDefault();
     //create the user
-    const res = await axios.post(
-      "https://temitope-wale-ogundeji.onrender.com/users",
-      createForm
-    );
+    const res = await axios.post("http://localhost:3001/users", createForm);
 
     // success message to display
     setSuccessMessage("Congratulationgs! user reated successfully!");

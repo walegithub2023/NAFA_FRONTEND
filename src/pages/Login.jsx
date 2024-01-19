@@ -4,6 +4,7 @@ import logo3 from "../images/logo3.png";
 import img1 from "../images/img1.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { serverUrl } from "../utils/helper";
 const loginContainerStyle = {
   border: "1px solid #ddd",
   borderRadius: "3px",
@@ -52,13 +53,10 @@ const Login = () => {
     e.preventDefault();
     try {
       //
-      const res = await axios.post(
-        "https://temitope-wale-ogundeji.onrender.com/login",
-        {
-          svcNo,
-          password,
-        }
-      );
+      const res = await axios.post(`${serverUrl}/login`, {
+        svcNo,
+        password,
+      });
 
       // Check if login was successful
 
