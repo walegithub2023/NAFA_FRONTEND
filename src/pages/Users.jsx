@@ -32,7 +32,9 @@ const Users = () => {
 
   const fetchUsers = async () => {
     //Fetch users
-    const res = await axios.get("http://localhost:3001/users");
+    const res = await axios.get(
+      `https://temitope-wale-ogundeji.onrender.com/users`
+    );
     //Set to state
     setUsers(res.data.users);
   };
@@ -49,7 +51,9 @@ const Users = () => {
   const handleDelete = async (_id) => {
     // Implement delete functionality, e.g., send delete request to server
     //Delet the user
-    const res = await axios.delete(`http://localhost:3001/users/${_id}`);
+    const res = await axios.delete(
+      `https://temitope-wale-ogundeji.onrender.com/${_id}`
+    );
     console.log(res);
     //update state
     const newUsers = [...users].filter((users) => {

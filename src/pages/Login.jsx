@@ -52,10 +52,13 @@ const Login = () => {
     e.preventDefault();
     try {
       //
-      const res = await axios.post("http://localhost:3001/login", {
-        svcNo,
-        password,
-      });
+      const res = await axios.post(
+        "https://temitope-wale-ogundeji.onrender.com/login",
+        {
+          svcNo,
+          password,
+        }
+      );
 
       // Check if login was successful
 
